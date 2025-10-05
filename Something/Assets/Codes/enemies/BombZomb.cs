@@ -3,7 +3,7 @@ using UnityEngine;
 public class BombZomb : EnemyBase
 {
     public float explosionRadius = 2.0f;
-    public float explosionDamage = 50.0f;
+    public int explosionDamage = 50;
     public GameObject explosionEffect;
 
     public GameObject bombdrop;
@@ -12,31 +12,46 @@ public class BombZomb : EnemyBase
 
     private bool explosion = false;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    protected override void MoveTowardsPlayer()
     {
-        if(collision.gameObject.CompareTag("Player"))
+        base.MoveTowardsPlayer();
+        if (Vector2.Distance(transform.position, player.position) <= 1.2f)
         {
-            explosion = true;
+            currentState = zombieState.damage;
+        }
+    }
+
+    protected override void attackPlayer()
+    {
+        if(!explosion)
+        {
             explode();
         }
     }
 
     void explode()
     {
-        if (explosionEffect != null)
+        explosion = true;
+
+        if(explosionEffect != null)
         {
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            GameObject effect = Instantiate(explosionEffect,transform.position, Quaternion.identity);
+            Destroy(effect, 3f);
         }
 
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-        foreach (Collider2D hitCollider in hitColliders)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        foreach(Collider2D hit in hits)
         {
-            foreach (string tag in damageTags)
+            if (hit.CompareTag("Player"))
             {
-                if (hitCollider.CompareTag(tag))
-                {
-                    Debug.Log("Bomb");
-                }
+                GameManager.Instance.DamagePlayer(explosionDamage);
+            }
+
+            EnemyBase enemy = hit.GetComponent<EnemyBase>();
+            if (enemy != null && enemy != this)
+            {
+                enemy.TakeDamage(explosionDamage);
             }
         }
 
@@ -45,16 +60,11 @@ public class BombZomb : EnemyBase
 
     protected override void Die()
     {
-        if (!explosion)
+        if (!explosion && bombdrop != null)
         {
-            DropBomb();
+            Instantiate(bombdrop, transform.position, Quaternion.identity);
         }
         base.Die();
-    }
-
-    void DropBomb()
-    {
-        Instantiate(bombdrop, transform.position, Quaternion.identity);
     }
 
     private void OnDrawGizmosSelected()

@@ -6,23 +6,28 @@ public class NormalZomb : EnemyBase
     public int attackDamage = 1;
     public float attackCooldown = 1.0f;
     private float lastAttackTime;
-    protected override void Update()
+
+    protected override void MoveTowardsPlayer()
     {
-        base.Update();
-        if (player != null && Vector3.Distance(transform.position, player.position) <= attackRange)
+        base.MoveTowardsPlayer();
+
+        if(Vector2.Distance(transform.position, player.position) <= attackRange)
         {
-            Attack();
+            currentState = zombieState.damage;
         }
     }
-    private void Attack()
+
+    protected override void attackPlayer()
     {
-        if (Time.time >= lastAttackTime + attackCooldown)
+        if(Time.time > lastAttackTime+attackCooldown)
         {
             lastAttackTime = Time.time;
+            GameManager.Instance.DamagePlayer(attackDamage);
         }
-    }
-    protected override void Die()
-    {
-        base.Die();
+
+        if(Vector2.Distance(transform.position, player.position) > attackRange)
+        {
+            currentState = zombieState.chasing;
+        }
     }
 }
