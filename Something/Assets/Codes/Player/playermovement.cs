@@ -12,20 +12,26 @@ public class Playermovement : MonoBehaviour
 
     void Update()
     {
+        //movement input
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
         movement = new Vector2(moveHorizontal,moveVertical).normalized;
 
         mousePOS = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        //shooting
         if (Input.GetMouseButtonDown(0))
         {
             weapon.Shoot();
         }
+        //dashing
+
+        //runing stmaina
+
     }
 
     private void FixedUpdate()
     {
+        //look at mouse
         Vector2 lookDir = mousePOS - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;

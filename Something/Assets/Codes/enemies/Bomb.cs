@@ -13,13 +13,14 @@ public class Bomb : MonoBehaviour
     {
         Invoke("Explode", delay);
     }
-
+    // Call this method to trigger the explosion
     void Explode()
     {
         if (explosionEffect != null)
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
         }
+        // Detect all colliders in the explosion radius for bomb
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
         foreach (Collider2D hitCollider in hitColliders)
         {

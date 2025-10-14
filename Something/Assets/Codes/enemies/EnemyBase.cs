@@ -17,12 +17,14 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Start()
     {
+        // Find the player by tag
         player = GameObject.FindGameObjectWithTag("Player").transform;
         GameManager.Instance.RegisterEnemy(this);
     }
 
     protected virtual void Update()
     {
+        // State machine logic
         switch (currentState)
         {
             case zombieState.idle:

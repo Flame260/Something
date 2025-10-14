@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     {
         playerCurrentHealth = playerHealth;
     }
-
+    // damage player logic
     public void DamagePlayer(int damage)
     {
         playerCurrentHealth -= damage;
@@ -47,9 +47,9 @@ public class GameManager : MonoBehaviour
 
     private void playerDie()
     {
-        // handle death of palyer
+        // handle death of palyer maybe add animation or something
     }
-
+    // damage enemy logic
     private void damageEnemy(EnemyBase enemy, int damge)
     {
         if(enemy != null)
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
             enemy.TakeDamage(damge);
         }
     }
-
+    // enemy registration system
     public void RegisterEnemy(EnemyBase enemy)
     {
         if(!allEnemies.Contains(enemy))
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             allEnemies.Add(enemy);
         }
     }
-
+    // enemy unregistration system
     public void UnregisterEnemy(EnemyBase enemy)
     {
         if(allEnemies.Contains(enemy))
