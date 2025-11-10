@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10519fd866b2ea4428163c2eeb522a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalZomb
-  speed: 2
+  speed: 4
   health: 100
   attackRange: 1.5
   attackDamage: 1

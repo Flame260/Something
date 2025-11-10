@@ -12,7 +12,10 @@ public class BombZomb : EnemyBase
 
     private bool explosion = false;
 
-
+    private void FixedUpdate()
+    {
+        speed += .1f;
+    }
     protected override void MoveTowardsPlayer()
     {
         base.MoveTowardsPlayer();

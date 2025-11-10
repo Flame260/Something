@@ -9,7 +9,7 @@ public class EnemyBase : MonoBehaviour
         chasing,
         damage,
     }
-    public float speed = 2.0f;
+    public float speed = 4.0f;
     public int health = 100;
 
     protected Transform player;

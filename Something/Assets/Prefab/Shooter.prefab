@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5f7418ad4818349b31c2ecb749a0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShooterZomb
-  speed: 2
+  speed: 4
   health: 100
   shootRange: 5
   enemyBullet: {fileID: 951805158001527821, guid: 6adfc089940fbaf408eb9f5710d8578f, type: 3}
