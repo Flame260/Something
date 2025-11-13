@@ -4,6 +4,7 @@ public class Playermovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Weapon weapon;
+    public GameObject Player;
     public float speed;
     Vector2 mousePOS;
     Vector3 direction;
@@ -44,5 +45,13 @@ public class Playermovement : MonoBehaviour
         direction = new Vector3(h, v, 0);
 
         return direction;
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Physics2D.OverlapCircle(Player.transform.position, 0.05f);
+        if (other.gameObject.tag == "BigRoom")
+        {
+            Debug.Log("hi");
+        }
     }
 }
