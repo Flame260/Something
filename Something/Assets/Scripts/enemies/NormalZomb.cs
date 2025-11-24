@@ -22,7 +22,7 @@ public class NormalZomb : EnemyBase
         if(Time.time > lastAttackTime+attackCooldown)
         {
             lastAttackTime = Time.time;
-            GameManager.Instance.DamagePlayer(attackDamage);
+            PlayerBehaviourScript.Instance.DamagePlayer(attackDamage);
         }
 
         if(Vector2.Distance(transform.position, player.position) > attackRange)

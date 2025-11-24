@@ -4,9 +4,6 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    // player health
-    public int playerHealth = 100;
-    public int playerCurrentHealth;
 
     //enemy list
     public List<EnemyBase> allEnemies = new List<EnemyBase>();
@@ -26,23 +23,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        playerCurrentHealth = playerHealth;
-    }
-    // damage player logic
-    public void DamagePlayer(int damage)
-    {
-        playerCurrentHealth -= damage;
-        playerCurrentHealth = Mathf.Clamp(playerCurrentHealth, 0, playerHealth);
 
-        if(playerCurrentHealth <= 0)
-        {
-            playerDie();
-        }
-    }
-
-    public void Healplayer(int healAmount)
-    {
-        // heal system maybe later
     }
 
     private void playerDie()

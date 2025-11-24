@@ -48,7 +48,7 @@ public class BombZomb : EnemyBase
         {
             if (hit.CompareTag("Player"))
             {
-                GameManager.Instance.DamagePlayer(explosionDamage);
+                PlayerBehaviourScript.Instance.DamagePlayer(explosionDamage);
             }
 
             EnemyBase enemy = hit.GetComponent<EnemyBase>();

@@ -25,7 +25,7 @@ public class EnemyBullet : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager.Instance.DamagePlayer(3);
+            PlayerBehaviourScript.Instance.DamagePlayer(3);
             Destroy(gameObject);
         }
     }
