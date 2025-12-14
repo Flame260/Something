@@ -13,6 +13,7 @@ TagManager:
   - BigRoomExitDoor
   - BigRoomEntranceDoor
   - BigRoom
+  - Weapon
   layers:
   - Default
   - TransparentFX

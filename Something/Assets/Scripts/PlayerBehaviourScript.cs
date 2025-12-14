@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class PlayerBehaviourScript : MonoBehaviour
 {
     public static PlayerBehaviourScript Instance;
     private Rigidbody2D rb;
-    public Weapons weapon;
+
 
     private Vector2 mousePos;
     private Vector2 moveDir;
@@ -27,6 +28,10 @@ public class PlayerBehaviourScript : MonoBehaviour
     private float HP;
     public float baseSpeed = 5f;
     private float speed;
+
+    [Header("Equipment")]
+    public Weapons weapon;
+    public bool haveWeapon;
 
     private void Awake()
     {
@@ -98,7 +103,7 @@ public class PlayerBehaviourScript : MonoBehaviour
         //Get Input for Shooting
         if (Input.GetMouseButtonDown(0))
         {
-            //weapon.Shoot();
+            weapon.Shoot();
         }
     }
 
@@ -156,6 +161,20 @@ public class PlayerBehaviourScript : MonoBehaviour
         if (HP <= 0)
         {
             //playerDie();
+        }
+    }
+
+    //Eqiup on PickUp
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Weapon")
+        {   
+            weapon = collision.GetComponent<Weapons>();
+            collision.transform.SetParent(this.transform);
+            //Set Weapons Local Position, Rotation, and Scale
+            weapon.transform.localPosition = weapon.localPos;
+            weapon.transform.localRotation = weapon.localRot;
+            weapon.transform.localScale = weapon.localSca;
         }
     }
 }
